@@ -1,0 +1,14 @@
+# NOTE 1: Require DISPLAY to function properly. Not going to hardcode to :0,
+#         because I use multiple session. Restart before first use.
+# NOTE 2: On Arch, I had to link ksshaskpass to /usr/lib/ssh/ssh-askpass.
+
+[Unit]
+Description=SSH key agent
+
+[Service]
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+
+[Install]
+WantedBy=default.target
